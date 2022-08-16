@@ -23,7 +23,7 @@ stats_1_sd <- sqrt(sum((stats_1 - mean(stats_1))**2)/var_count)
 stats_2_sd  <- sqrt(sum((stats_2 - mean(stats_2))**2)/var_count)
 stats_sum <- sum((stats_1 - mean(stats_1))*(stats_2 - mean(stats_2)))/var_count
 stats_soukan <- stats_sum / (stats_1_sd*stats_2_sd)
-# tips: 相関係数の計算は母標本偏差を利用する
+# tips: 相関係数の計算は母標準偏差を利用する
 t_1 <- stats_soukan * sqrt(var_count-2)
 t_2 <- sqrt(1 - stats_soukan**2)
 t_value = t_1/t_2

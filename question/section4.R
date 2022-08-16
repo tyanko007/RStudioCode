@@ -5,33 +5,33 @@
 ## 母集団分布は標準正規分布 N(0, 1^2)とする
 ## > サンプルサイズが大きくなるにつれ標本分布は中央に集約、推定値が大きい値が減少する傾向がある
 
-quest_1 = function(){
-  sample_variance = numeric(length=5000)
-  for (i in 1:5000){
-    sample = rnorm(10, mean=50, sd=10)
-    sample_variance[i] = mean(sample)
-  }
-  hist(sample_variance, freq=FALSE)
-  curve(dnorm(x, mean=50, sd=sqrt(10)), add=TRUE)
-  print("結果はPlotコンソールを確認してください")
-}
-
-quest_2 = function(a = c(1,4,9,16,25)){
-  mod = function(x){
+section4 = function(){
+  quest_1 = function(){
     sample_variance = numeric(length=5000)
     for (i in 1:5000){
-      sample = rnorm(x, mean=0, sd=1)
+      sample = rnorm(10, mean=50, sd=10)
       sample_variance[i] = mean(sample)
     }
-    hist(sample_variance, freq=FALSE, main=paste("sample size is", x))
+    hist(sample_variance, freq=FALSE)
+    curve(dnorm(x, mean=50, sd=sqrt(10)), add=TRUE)
+    print("結果はPlotコンソールを確認してください")
   }
   
-  for(i in 1:length(a)){
-    mod(a[i])
+  quest_2 = function(a = c(1,4,9,16,25)){
+    mod = function(x){
+      sample_variance = numeric(length=5000)
+      for (i in 1:5000){
+        sample = rnorm(x, mean=0, sd=1)
+        sample_variance[i] = mean(sample)
+      }
+      hist(sample_variance, freq=FALSE, main=paste("sample size is", x))
+    }
+    
+    for(i in 1:length(a)){
+      mod(a[i])
+    }
   }
-}
-
-section4 = function(){
+  
   quest_1()
   quest_2()
 }

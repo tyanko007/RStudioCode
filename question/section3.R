@@ -3,20 +3,20 @@
 # Q2 上図の相関係数を算出
 # Q3 20名の食の好みをクロス集計票で作成
 
-quest_1 = function(x,y){
-  plot(x,y)
-}
-
-quest_2 = function(x,y){
-  collback = cor(x,y)
-  collback
-}
-
-quest_3 = function(x,y){
-  table(x,y)
-}
-
 section3 = function(){
+  quest_1 = function(x,y){
+    plot(x,y)
+  }
+  
+  quest_2 = function(x,y){
+    collback = cor(x,y)
+    collback
+  }
+  
+  quest_3 = function(x,y){
+    table(x,y)
+  }
+  
   study = c(1,3,10,12,6,3,8,4,1,5)
   score = c(20,40,100,80,50,50,70,50,10,60)
   food = c("洋食","和食","和食","洋食","和食","洋食","洋食","和食","洋食","洋食","和食","洋食","和食","洋食","和食","和食","洋食","洋食","和食","和食")
