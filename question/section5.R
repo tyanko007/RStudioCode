@@ -88,16 +88,38 @@ section5 <- function(){
     print(data.frame(c(x_line, x_value), row.names=c("X^2","実数")))
   }
   
+  quest_5 <- function(a,b){
+    # サンプルサイズが等倍の時
+    print(cor.test(a,b))
+    
+    # サンプルサイズが2倍の時
+    a2 = rep(a, 2)
+    b2 = rep(b, 2)
+    print(cor.test(a2, b2))
+    
+    # 自由度に合わせた作図(t分布)
+    curve(dt(x, 3), -5,5, col="red")
+    curve(dt(x, 8), add=TRUE, col="blue")
+    abline(v=qt(0.025, 3), col="red")
+    abline(v=qt(0.975, 3), col="red")
+    abline(v=qt(0.025, 8), col="blue")
+    abline(v=qt(0.975, 8), col="blue")
+  }
+  
   height_1 <- c(165,150,170,168,159,170,167,178,155,159)
   height_2 <- c(161,162,166,171,155,160,168,172,155,167)
-  #quest_1(height_1, height_2)
+  quest_1(height_1, height_2)
   
   study <- c(1,3,10,12,6,3,8,4,1,5)
   score <- c(20,40,100,80,50,50,70,50,10,60)
-  #quest_2(study, score)
-  #quest_3(study, score)
+  quest_2(study, score)
+  quest_3(study, score)
   
   food <- c("洋食","和食","和食","洋食","和食","洋食","洋食","和食","洋食","洋食","和食","洋食","和食","洋食","和食","和食","洋食","洋食","和食","和食")
   taste <- c("甘党","辛党","甘党","甘党","辛党","辛党","辛党","辛党","甘党","甘党","甘党","甘党","辛党","辛党","甘党","辛党","辛党","甘党","辛党","辛党")
   quest_4(food, taste)
+  
+  language = c(60,40,30,70,55)
+  social = c(80,25,35,70,50)
+  quest_5(language, social)
 } 
