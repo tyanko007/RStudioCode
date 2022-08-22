@@ -38,7 +38,7 @@ csvファイルのデータを描画する場合は数値データをベクト�
 - plot(a,b,xlim,ylim) # a,bに対する散布図の作成。[xy]limを設定することで軸の最大値を設定できる
 - points(x,y.cex) # (x,y)の座標に散布図のプロット。cexで倍率を設定可能
 - legend(x, y, legend) # (x,y)の座標に凡例を追記。pchを設定することでシンボルも設定可能
-- (as.)matrix(x, row, col=1) # xを２次元配列のマトリックスデータとして出力
+- (as.)matrix(x, nrow=1, ncol=1, option{byrow=bool}) # xを２次元配列のマトリックスデータとして出力。byrowを指定することで行を優先した値の設定が可能
 - (as.)array(matrix, type) # 多次元配列のデータを一次元配列に変換
 - table(a,b, row.names="table_name") # a,bにおけるクロス集計を実施
 - qnorm(p, {lower.tail=${bool}}) # 標準正規分布における下側確立に対応する値を算出
@@ -47,8 +47,19 @@ csvファイルのデータを描画する場合は数値データをベクト�
 - pt(p, df, {lower.tail=${bool}}) # t分布における下側確立の算出
 - qchisq(p, df, {lower.tail=${bool}}) # カイ二乗分布における下側確率に対応する値の算出
 - pchisq(p, df, {lower.tail=${bool}}) # カイ二乗分布における下側確立の算出
-- t.test(x) # xにおけるt検定の実施
+- t.test(x, val={x2...}, option{mu=x', sd=σ^n, var.equal=bool, paired=bool}) # xにおけるt検定の実施
 - cor.test(a,b) # a,bの無相関検定の実施
 - chisq.test(table) # tableにおける独立性の検定の実施
 - dt(x, df) # t分布の確立(密度)の算出
 - data.frame(x, label) # データフレームの作成
+- var.test(a,b) # a,b間での分散の等質性の検定(2変数の分散検定)
+- rep(x, count) # xをcount数分繰り返した配列データの作成
+- cbind(str_array, [str_array2, ...]) # データを行列に変換
+- colMeans(vector) # 各行の平均値を計算
+- df(x, df1, df2) # 自由度1と自由度2に対するF分布の確率密度を算出
+- factor(str.array) # 文字列配列を要因型へ変換
+- oneway.test(data~vector, option{var.equal=bool}) # 一元配置分散分析のみ実施可能な分散分析用関数
+- aov(data~vector) # 最も一般的な分散分析用関数。結果はsummary関数を利用すれば分散分析表で実装可能
+- anova(lm(data~vector)) # 複数のモデルの比較など高度な分析にも対応している分散分析関数
+- qtukey(x, df1, df2, option{lower.tail=bool}) # 自由度に沿ったtukeyの棄却値を算出
+- TukeyHSD(aov(data~vector)) # 多重比較の算出関数
