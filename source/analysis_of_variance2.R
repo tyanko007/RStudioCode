@@ -59,5 +59,14 @@ res_sum <- sum(residual^2) # 残差平方和
 print(c(all_sum, val_sum, pop_sum, res_sum))
 print(round(all_sum, 5) == round(val_sum+pop_sum+res_sum, 5))
 
+# f値の算出
+## F = (条件平方和/条件の自由度)/(残差平方和/残差の自由度)
+val_df <- ncol(all_data)-1
+pop_df <- nrow(all_data)-1
+f_1 <- val_sum/val_df
+f_2 <- res_sum/(val_df*pop_df)
+f_value <- f_1 / f_2
+print(data.frame(val=f_value, row.names="f_value"))
+
 # 自由度の考え方は以下
 ## 残差以外：データの個数-1, 残差：条件df X 個人差df
