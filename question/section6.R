@@ -4,34 +4,36 @@
 ## Q3: 本書サンプルデータから、ダイエットプログラムは効果があるといえるか
 
 section6 <- function(){
-  quest_1 <- function(a= c(70,66,54,60,59),b= c(50,43,59,61,55), len=TRUE){
+  quest_1 <- function(a= c(70,66,54,60,59),b= c(50,43,59,61,55), len=FALSE){
     # 帰無仮説: 両郡に対する母平均に差はない(得手不得手での差はない)
     
     # サンプルサイズの違いによる検定統計量
-    ## aN = bN: t = D' / (σ^d / √n)
-    ## aN != bN t = a'-b' / √(σ^x/aN)+(σ^x/bN)
-    ### σ^x = ((aN-1)*var(a)+(aN-1)*var(b)) / aN+aN-2
+    ## t = a'-b' / σ^x√(1/aN)+(1/bN)
+    ### σ^x = ((aN-1)*var(a)+(bN-1)*var(b)) / df
+    ### df = aN+bN-2
+    
     if(len==TRUE){
       # print(t.test(a, b, paired=TRUE)) # 関数での実装
-      c <- length(a)
+      c <- length(a)+length(b)-2
       D_data <- a-b
-      D_sd <- sd(D_data)
+      D_sd <- var(D_data)
       D_mean <- mean(D_data)
-      t_value <- D_mean / (D_sd/sqrt(c))
+      t_value <- D_mean / sqrt(D_sd/c)
     }else{
-      a_sd <- sd(a)
-      b_sd <- sd(b)
-      sp_1 <- (length(a)-1)*a_sd + (length(a)-1)*b_sd
-      sp_value <- sp_1 / length(a)+length(a)-2
+      a_var <- var(a)
+      b_var <- var(b)
+      sp_1 <- (length(a)-1)*a_var + (length(b)-1)*b_var
+      c <- length(a)+length(b)-2
+      sp_value <- sp_1 /c
       t_1 <- mean(a)-mean(b)
-      t_2 <- sqrt(sp_value/length(a) + sp_value/length(b))
+      t_2 <- sqrt(sp_value * (1/length(a)+1/length(b)))
+      # t_2 <- sqrt(a_var/length(a)+b_var/length(b))
       t_value <- t_1 / t_2
     }
-
     t_upper <- qt(0.975, c-1)
-    t_lower <- qt(0.025, c-1)
+    t_lower <- qt(0.975, c-1, lower.tail = FALSE)
     print("aとbにおける平均値の差の検定")
-    print(data.frame(value=c(t_value, t_upper, t_lower), row.names=c("t_value", "0.975", "0.025")))
+    print(data.frame(value=c(t_value, t_upper, t_lower, pt(t_value, c)), row.names=c("t_value", "0.975", "0.025", "p_percent")))
     print(ifelse(t_value<t_lower || t_value>t_upper, "平均値に差はある(5%の両側検定で有意である)", "平均値に差があるとは言えない"))
   }
   
@@ -53,6 +55,7 @@ section6 <- function(){
   }
   # print(like)
   # print(unlike)
+  
   quest_1(like, unlike, len=FALSE)
   
   male <- NULL
@@ -66,9 +69,11 @@ section6 <- function(){
   }
   # print(male)
   # print(female)
-  quest_1(male, female,len = TRUE)
+  quest_1(male, female,len = FALSE)
   
   before_diet_program <- c(61,50,41,55,51,48,46,55,65,70)
   after_diet_program <- c(59,48,33,54,47,52,38,50,64,63)
   quest_3(before_diet_program, after_diet_program)
 }
+
+section6()

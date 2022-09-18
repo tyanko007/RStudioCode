@@ -9,8 +9,9 @@
 section5 <- function(){
   quest_1 <- function(a,b){
     # 有意水準は5%
-    print(t.test(a,mu=170))
-    print(t.test(b,mu=170))
+    # print(t.test(a,mu=170))
+    # print(t.test(b,mu=170))
+    print(t.test(append(a,b),mu=170))
   }
   quest_2 <- function(a,b){
     # 検定統計量: t = r*sqrt(n-2)/sqrt(1-r^2)
@@ -123,3 +124,5 @@ section5 <- function(){
   social = c(80,25,35,70,50)
   quest_5(language, social)
 } 
+
+section5()

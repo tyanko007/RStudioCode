@@ -14,7 +14,7 @@ section3 = function(){
   }
   
   quest_3 = function(x,y){
-    table(x,y)
+    print(table(x,y))
   }
   
   study = c(1,3,10,12,6,3,8,4,1,5)
@@ -29,3 +29,5 @@ section3 = function(){
   print("cross stats table")
   quest_3(food, taste)
 }
+
+section3()

@@ -36,14 +36,26 @@ section7 <- function(){
     f_line <- qf(0.05, gunkan_df, gunnai_df, lower.tail=FALSE)
     print(data.frame(val=c(f_value, f_line), row.names=c("f_value", "0.95")))
   }
-  quest_2 <- function(){
-    print("--")
+  quest_2 <- function(class, name, test, num, num2){
+    class_fac <- factor(c(rep(class[1], num), rep(class[2], num), rep(class[3], num)))
+    name_fac <- factor(c(rep(name, 3)))
+    # print(class_fac)
+    # print(name_fac)
+    result <- data.frame(name=name_fac, class=class_fac, test=test)
+    # print(result)
+    print(summary(aov(test~class_fac+name_fac, result)))
+    print(TukeyHSD(aov(test~class_fac+name_fac, result)))
   }
   
   test_data <- c(75,61,68,58,66,55,65,63,62,60,66,63,55,53,59,63,65,60,78,52,59,66,73,64,52,59,44,67,47,53,58,49)
   # print(length(test_value))
   faculty_data <- c("jurisprudence", "literature", "science", "engineering")
   quest_1(test_data, faculty_data, 8)
+  
+  test_data2 <- c(51,66,70,75,73,62,55,47,54,55,39,60,62,56,55,37,47,60,62,53,50)
+  classes <- c("lecture", "question", "practice")
+  member <- c("morimoto", "tanaka", "inaba", "segi", "takahashi", "kudou", "kaneko")
+  quest_2(classes, member, test_data2, 7, 3)
 }
 
 section7()

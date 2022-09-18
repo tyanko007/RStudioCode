@@ -48,3 +48,5 @@ section2 = function(){
     print("quest_1のデータ型が数値型ではないです")
   }
 }
+
+section2()
