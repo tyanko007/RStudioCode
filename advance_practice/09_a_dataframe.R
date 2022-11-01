@@ -8,7 +8,7 @@ print(textfile)
 csvfile <- read.csv("/cloud/project/advance_practice/brank_files/csvfile.csv")
 print(csvfile)
 
-# jsonファイル
+# jsonファイル (jsonlite 利用)
 jsonfile <- fromJSON("/cloud/project/advance_practice/brank_files/jsonfile.json")
 print(jsonfile)
 
